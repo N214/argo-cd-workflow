@@ -5,6 +5,8 @@ metadata:
   namespace: argo
 spec:
   entrypoint: print-time
+  ttlStrategy:
+    secondsAfterCompletion: 0
   templates:
     - name: print-time
       container:
