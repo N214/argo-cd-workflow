@@ -1,18 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Workflow
+kind: WorkflowTemplate
 metadata:
-  name: timestamp-workflow
+  name: timestamp-workflow-template
   namespace: argo
 spec:
-  entrypoint: whalesay
-  ttlStrategy:
-    secondsAfterCompletion: 3
+  entrypoint: print-time
   templates:
-  - name: whalesay
-    container:
-      image: docker/whalesay:latest
-      command: [sh, -c]
-      args:
-        - |
-          echo "Timestamp: $(date)" | cowsay
-          sleep 30
+    - name: print-time
+      container:
+        image: alpine:latest
+        command: [sh, -c]
+        args: ["echo Current timestamp: $(date)"]
