@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  name: hello-world-workflow
+  name: timestamp-workflow
   namespace: argo
 spec:
   entrypoint: whalesay
@@ -9,5 +9,7 @@ spec:
   - name: whalesay
     container:
       image: docker/whalesay:latest
-      command: [cowsay]
-      args: ["Hello, World!"]
+      command: [sh, -c]
+      args:
+        - |
+          echo "Timestamp: $(date)" | cowsay
