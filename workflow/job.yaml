@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  name: timestamp-workflow
+  name: timestamp-workflow-
   namespace: argo
 spec:
   entrypoint: whalesay
