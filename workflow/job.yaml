@@ -5,7 +5,8 @@ metadata:
   namespace: argo
 spec:
   entrypoint: whalesay
-  podRetention: OnFailure
+  ttlStrategy:
+    secondsAfterCompletion: 3
   templates:
   - name: whalesay
     container:
@@ -14,4 +15,4 @@ spec:
       args:
         - |
           echo "Timestamp: $(date)" | cowsay
-          sleep 60
+          sleep 30
