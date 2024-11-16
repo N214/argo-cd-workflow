@@ -5,7 +5,6 @@ metadata:
   namespace: argo
 spec:
   entrypoint: whalesay
-  podRetention: Always
   templates:
   - name: whalesay
     container:
