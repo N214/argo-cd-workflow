@@ -1,4 +1,25 @@
+Argo suite test
 
+This test include Argo CD, Argo Event and Argo Workflow.
 
-helm install my-argo-cd ./argo-cd-7.7.3.tgz
-helm install workflow ./argo-workflows-0.42.7.tgz
+## Instruction
+- Create local k8s cluster with kind
+
+- Install Argo CD
+
+```sh
+helm repo add argo https://argoproj.github.io/argo-helm
+helm install my-argo-cd argo/argo-cd --version 7.7.3
+```
+
+- Install Argo Workflow
+
+```sh
+ARGO_WORKFLOWS_VERSION="v3.6.0"
+kubectl apply -n argo -f "https://github.com/argoproj/argo-workflows/releases/download/${ARGO_WORKFLOWS_VERSION}/quick-start-minimal.yaml"
+```
+
+- Install Argo event
+
+### App project
+### Applicationset

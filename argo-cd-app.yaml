@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: local-workflow-app
-  namespace: default  # Namespace where Argo CD is installed
+  name: argo-workflow-jon
+  namespace: default
 spec:
-  project: default
-  source:
-    directory:
-      recurse: true
-    path: ./workflow
   destination:
-    namespace: argo  # Namespace where the workflow will be deployed
+    namespace: argo
     server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/N214/argo-cd-workflow.git
+    targetRevision: HEAD
+    path: workflow
+  project: default
   syncPolicy:
     automated:
       prune: true

@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: elements-yaml
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - list:
+      elements:
+      - name: component1
+        chart: podinfo
+        version: "6.3.2"
+        releaseName: component1
+        repoUrl: "https://stefanprodan.github.io/podinfo"
+        namespace: component1
+      - name: component2
+        chart: podinfo
+        version: "6.3.3"
+        releaseName: component2
+        repoUrl: "ghcr.io/stefanprodan/charts"
+        namespace: component2
+  template:
+    metadata:
+      name: '{{.name}}'
+    spec:
+      project: default
+      sources:
+        - chart: '{{.chart}}'
+          repoURL: '{{.repoUrl}}'
+          targetRevision: '{{.version}}'
+          helm:
+            releaseName: '{{.releaseName}}'
+            # valueFiles:
+      syncPolicy:
+        automated:
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.namespace}}'
