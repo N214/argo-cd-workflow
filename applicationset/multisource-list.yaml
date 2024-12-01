@@ -32,6 +32,7 @@ spec:
           helm:
             releaseName: '{{.releaseName}}'
             # valueFiles:
+            #   - '{{.valuefile}}'
       syncPolicy:
         automated:
           selfHeal: true

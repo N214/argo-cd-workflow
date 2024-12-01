@@ -9,7 +9,7 @@ This test include Argo CD, Argo Event and Argo Workflow.
 
 ```sh
 helm repo add argo https://argoproj.github.io/argo-helm
-helm install my-argo-cd argo/argo-cd --version 7.7.3
+helm upgrade --install my-argo-cd argo/argo-cd --version 7.7.3 --set configs.params."applicationsetcontroller\.enable\.progressive\.syncs"=true
 ```
 
 - Install Argo Workflow
